@@ -85,6 +85,26 @@ Version 3.0 is a complete rewrite from the ground up. The original version (1.0/
 - Old: Direct UI updates
 - New: Centralized update methods with logging
 
+## What's New in Version 3.1
+
+Version 3.1 brings improved framework support and expanded platform compatibility.
+
+### Key Changes
+
+**Flet 0.80 Upgrade**
+- Migrated from Flet 0.28 to Flet 0.80, for better compatibility moving forward.
+- Updated UI components to use the latest Flet API
+- Better async handling and more reliable subprocess management
+
+**macOS Support**
+- Full macOS support with native app bundle builds
+- Automatic detection of macOS Unreal Engine installations
+- Uses `RunUAT.sh` on macOS instead of `RunUAT.bat`
+- Properly handles macOS-specific paths and file dialogs
+
+**Python Version Requirement**
+- Python 3.10 is now the minimum required version (previously 3.8)
+
 ## Supported Platforms
 
 This tool supports both **Windows** and **macOS**. It automatically detects your operating system and uses the appropriate Unreal Engine scripts (`RunUAT.bat` on Windows, `RunUAT.sh` on macOS).
@@ -100,7 +120,7 @@ You might need to add an exception to your antivirus, don't worry it's safe (rea
 
 ### Option 2: Run from Source
 
-You'll need Python 3.8 or higher installed on your system.
+You'll need Python 3.10 or higher installed on your system.
 
 Install dependencies:
 
