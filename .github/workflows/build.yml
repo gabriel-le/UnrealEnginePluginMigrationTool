@@ -24,7 +24,7 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          pyinstaller --name="UnrealPluginMigrationTool" --onefile --windowed --collect-data flet --collect-data flet_core UnrealPluginMigrationTool.py
+          pyinstaller --name="UnrealPluginMigrationTool" --onefile --windowed --collect-data flet --collect-data flet_core --hidden-import=flet_desktop --collect-all flet_desktop UnrealPluginMigrationTool.py
 
       - name: Rename artifact
         run: |
@@ -55,7 +55,7 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          pyinstaller --name="UnrealPluginMigrationTool" --onefile --windowed --collect-data flet --collect-data flet_core UnrealPluginMigrationTool.py
+          pyinstaller --name="UnrealPluginMigrationTool" --onefile --windowed --collect-data flet --collect-data flet_core --hidden-import=flet_desktop --collect-all flet_desktop UnrealPluginMigrationTool.py
 
       - name: Create ZIP of macOS build
         run: |

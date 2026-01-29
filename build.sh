@@ -17,6 +17,8 @@ pyinstaller --name="UnrealPluginMigrationTool" \
     --osx-bundle-identifier="com.unrealpluginmigration.tool" \
     --collect-data flet \
     --collect-data flet_core \
+    --hidden-import=flet_desktop \
+    --collect-all flet_desktop \
     UnrealPluginMigrationTool.py
 
 echo ""

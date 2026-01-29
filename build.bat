@@ -10,6 +10,14 @@ if errorlevel 1 (
     echo.
 )
 
+REM Ensure flet_desktop is installed (needed for native window builds)
+python -m pip show flet-desktop >nul 2>&1
+if errorlevel 1 (
+    echo flet-desktop not found. Installing...
+    python -m pip install flet-desktop
+    echo.
+)
+
 REM Build the executable as a single file
 echo Creating single-file executable...
 pyinstaller --name="UnrealPluginMigrationTool" ^
@@ -18,6 +26,8 @@ pyinstaller --name="UnrealPluginMigrationTool" ^
     --icon=NONE ^
     --collect-data flet ^
     --collect-data flet_core ^
+    --hidden-import=flet_desktop ^
+    --collect-all flet_desktop ^
     UnrealPluginMigrationTool.py
 
 echo.
