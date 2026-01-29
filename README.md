@@ -85,12 +85,18 @@ Version 3.0 is a complete rewrite from the ground up. The original version (1.0/
 - Old: Direct UI updates
 - New: Centralized update methods with logging
 
+## Supported Platforms
+
+This tool supports both **Windows** and **macOS**. It automatically detects your operating system and uses the appropriate Unreal Engine scripts (`RunUAT.bat` on Windows, `RunUAT.sh` on macOS).
+
 ## Installation
 
-### Option 1: Download Pre-built Executable (Recommended)
+### Option 1: Download Pre-built Release (Recommended)
 
-Download the latest `.exe` file from the [Releases page](https://github.com/mickexd/UnrealEnginePluginMigrationTool/releases). No installation required - just run it!
-You might need to add an exception to your antivirus, don't worry it's safe (read the code)
+**Windows:** Download the latest `.exe` file from the [Releases page](https://github.com/mickexd/UnrealEnginePluginMigrationTool/releases). No installation required - just run it!
+You might need to add an exception to your antivirus, don't worry it's safe (read the code).
+
+**macOS:** Download the latest `.app` bundle or standalone executable from the [Releases page](https://github.com/mickexd/UnrealEnginePluginMigrationTool/releases). You may need to right-click and select "Open" the first time to bypass Gatekeeper if the app is not signed.
 
 ### Option 2: Run from Source
 
@@ -111,7 +117,11 @@ pip install flet pyinstaller
 Run the application:
 
 ```bash
+# Windows
 python UnrealPluginMigrationTool.py
+
+# macOS/Linux
+python3 UnrealPluginMigrationTool.py
 ```
 
 ### Option 3: Build Your Own Executable
@@ -126,13 +136,23 @@ pip install -r requirements.txt
 
 2. Run the build script:
 
+**Windows:**
+
 ```bash
 build.bat
 ```
 
-3. Find the executable in the `dist` folder
+**macOS:**
 
-The build script uses PyInstaller to create a single-file executable that can be distributed without Python installed.
+```bash
+./build.sh
+```
+
+3. Find the executable in the `dist` folder:
+   - Windows: `dist/UnrealPluginMigrationTool.exe`
+   - macOS: `dist/UnrealPluginMigrationTool.app` (app bundle) or `dist/UnrealPluginMigrationTool` (standalone)
+
+The build scripts use PyInstaller to create standalone executables that can be distributed without Python installed.
 
 ## How to Use
 
@@ -151,8 +171,10 @@ The build script uses PyInstaller to create a single-file executable that can be
 3. **Select Unreal Engine Version**
 
    - Click the folder icon next to "Unreal Engine Root Folder"
-   - Navigate to your UE installation (example: C:\Program Files\Epic Games\UE_5.6)
-   - The tool checks that the necessary files exist
+   - Navigate to your UE installation:
+     - **Windows:** `C:\Program Files\Epic Games\UE_5.6`
+     - **macOS:** `/Users/Shared/Epic Games/UE_5.6` or `/Applications/UE_5.6`
+   - The tool checks that the necessary UAT script exists (`RunUAT.bat` on Windows, `RunUAT.sh` on macOS)
 
 4. **Start Migration**
    - Click "Begin Migration"
@@ -199,7 +221,7 @@ The tool runs Unreal Engine's BuildPlugin command through the Automation Tool (U
 | Input Fields        | Text labels       | Labeled text fields                |
 | Validation          | None              | Comprehensive with visual feedback |
 | Error Messages      | Generic           | Detailed and specific              |
-| Path Verification   | None              | Checks RunUAT.bat exists           |
+| Path Verification   | None              | Checks RunUAT script exists (cross-platform) |
 | Status Messages     | Small/none        | Large and prominent                |
 | Progress Indication | None              | Progress bar + status text         |
 | Responsiveness      | Fixed size        | Adapts to window size              |

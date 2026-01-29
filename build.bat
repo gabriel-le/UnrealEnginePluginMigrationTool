@@ -16,6 +16,8 @@ pyinstaller --name="UnrealPluginMigrationTool" ^
     --onefile ^
     --windowed ^
     --icon=NONE ^
+    --collect-data flet ^
+    --collect-data flet_core ^
     UnrealPluginMigrationTool.py
 
 echo.

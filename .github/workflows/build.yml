@@ -1,0 +1,74 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-windows:
+    name: Build Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build with PyInstaller
+        run: |
+          pyinstaller --name="UnrealPluginMigrationTool" --onefile --windowed --collect-data flet --collect-data flet_core UnrealPluginMigrationTool.py
+
+      - name: Rename artifact
+        run: |
+          mv dist/UnrealPluginMigrationTool.exe dist/UnrealPluginMigrationTool-Windows-x64.exe
+
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-build
+          path: dist/UnrealPluginMigrationTool-Windows-x64.exe
+          retention-days: 1
+
+  build-macos:
+    name: Build macOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build with PyInstaller
+        run: |
+          pyinstaller --name="UnrealPluginMigrationTool" --onefile --windowed --collect-data flet --collect-data flet_core UnrealPluginMigrationTool.py
+
+      - name: Create ZIP of macOS build
+        run: |
+          cd dist
+          if [ -d "UnrealPluginMigrationTool.app" ]; then
+            zip -r UnrealPluginMigrationTool-macOS.zip UnrealPluginMigrationTool.app
+          else
+            zip UnrealPluginMigrationTool-macOS.zip UnrealPluginMigrationTool
+          fi
+
+      - name: Upload macOS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-build
+          path: dist/UnrealPluginMigrationTool-macOS.zip
+          retention-days: 1
