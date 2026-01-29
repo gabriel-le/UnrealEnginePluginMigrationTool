@@ -35,7 +35,7 @@ jobs:
         with:
           name: windows-build
           path: dist/UnrealPluginMigrationTool-Windows-x64.exe
-          retention-days: 1
+          retention-days: 7
 
   build-macos:
     name: Build macOS
@@ -71,4 +71,4 @@ jobs:
         with:
           name: macos-build
           path: dist/UnrealPluginMigrationTool-macOS.zip
-          retention-days: 1
+          retention-days: 7
