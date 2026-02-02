@@ -41,4 +41,5 @@ if exist "dist\UnrealPluginMigrationTool.exe" (
     echo Build failed! Check the output above for errors.
 )
 
-pause
+REM Skip pause in CI environments
+if not defined CI pause
